@@ -20,6 +20,7 @@ canvas_background_rect = canvas_background.get_rect(center=(((res_x + toolbarWid
 logo = pygame.transform.scale_by(pygame.image.load('assets/logo_white.png'), 6)
 logo_rect = canvas_background.get_rect(midtop=(100, 2))
 
+color_text_box = text_box(x=100, y=100, w=174, h=50)
 
 # create the list that contains the individual pixel color data
 def init_grid(width, height, color):
@@ -64,6 +65,8 @@ def draw_screen():
 
     screen.blit(logo, (0, 0))
 
+    color_text_box.draw(screen)
+
 
 def get_cursor_pos(pos):
     x, y = pos
@@ -75,12 +78,14 @@ def get_cursor_pos(pos):
 
     return row, col
 
-
 grid = init_grid(canvas_width, canvas_height, (255, 255, 255, 0))
 
 # Main program loop
 while True:
+
     for event in pygame.event.get():
+        color_text_box.handle_event(event, hex_allowed_input)
+        
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
@@ -89,8 +94,9 @@ while True:
             pos =  pygame.mouse.get_pos()
 
             try:
+                brush_color = convert(color_text_box.text)
                 row, col = get_cursor_pos(pos)
-                grid[row][col] = (0, 0, 0, 1)
+                grid[row][col] = (brush_color)
 
             except IndexError:
                 pass

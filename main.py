@@ -94,9 +94,13 @@ while True:
             pos =  pygame.mouse.get_pos()
 
             try:
-                brush_color = convert(color_text_box.text)
-                row, col = get_cursor_pos(pos)
-                grid[row][col] = (brush_color)
+                if not len(color_text_box.text) == 6:
+                    color_text_box.text = '0000'
+                
+                else:
+                    brush_color = convert(color_text_box.text)
+                    row, col = get_cursor_pos(pos)
+                    grid[row][col] = (brush_color)
 
             except IndexError:
                 pass

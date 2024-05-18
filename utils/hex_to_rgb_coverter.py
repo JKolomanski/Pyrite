@@ -1,3 +1,8 @@
+'''
+This function coverts a string representing hex color code
+to a list containing rgb values
+'''
+
 def convert(hex):
     alphabet = ['A', 'B', 'C', 'D', 'E', 'F']
     alphabet_values = [10, 11, 12, 13, 14, 15]
@@ -34,6 +39,7 @@ def convert(hex):
     rgb.append(convert_color(r))
     rgb.append(convert_color(g))
     rgb.append(convert_color(b))
+    # Add a fourth element containing transparency data
     rgb.append(1)
 
     return rgb

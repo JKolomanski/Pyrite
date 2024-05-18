@@ -12,19 +12,15 @@ class text_box:
         self.color = color_inactive
         self.text = text
         self.text_surface = font.render(text, True, self.color)
+        self.active = False
 
     def handle_event(self, event, allowedInput):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            if self.rect.collidepoint(event.pos):
-                if not len(self.text) == 6:
-                    self.text = '000000'
-
+            if self.rect.collidepoint(event.pos) and not self.active:
                 self.active = True
                 self.color = color_active
-            else:
-                if not len(self.text) == 6:
-                    self.text = '000000'
 
+            else:
                 self.active = False
                 self.color = color_inactive
 
